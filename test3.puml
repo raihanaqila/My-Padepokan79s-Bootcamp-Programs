@@ -1,0 +1,179 @@
+@startuml
+class org.example.OOP.BookCase.Childs.Comic {
+- Boolean volumeSeries
+- double tax
+- Mangaka author
++ <<Create>> Comic()
++ <<Create>> Comic(String,String,Mangaka,Publisher,double,Boolean,double)
++ void calculatePrice()
++ String toString()
++ void calculateTax()
++ Boolean getVolumeSeries()
++ void setVolumeSeries(Boolean)
++ double getTax()
++ void setTax(double)
++ Mangaka getAuthor()
++ void setAuthor(Mangaka)
+}
+class org.example.OOP.BookCase.Publisher {
+- String publisherName
+- String country
+- double productionCost
++ <<Create>> Publisher()
++ <<Create>> Publisher(String,String,double)
++ String toString()
++ String getPublisherName()
++ void setPublisherName(String)
++ String getCountry()
++ void setCountry(String)
++ double getProductionCost()
++ void setProductionCost(double)
+}
+class org.example.OOP.BookCase.Repositories.RepositoryPublisher {
+- List<Publisher> publishers
++ <<Create>> RepositoryPublisher()
++ void addPublisher(Publisher)
++ List<Publisher> getAllPublishers()
+}
+class org.example.OOP.BookCase.Childs.Novelis {
+- Boolean serial
+- String rating
++ <<Create>> Novelis()
++ <<Create>> Novelis(String,String,String,int,Boolean,String)
++ String getFullName()
++ String toString()
++ Boolean getSerial()
++ void setSerial(Boolean)
++ String getRating()
++ void setRating(String)
+}
+class org.example.OOP.BookCase.Childs.EBook {
++ <<Create>> EBook()
++ <<Create>> EBook(String,String,Author,Publisher,double)
++ void calculatePrice()
++ String toString()
+}
+class org.example.OOP.BookCase.Childs.Mangaka {
+- String rating
++ <<Create>> Mangaka()
++ <<Create>> Mangaka(String,String,String,int,String)
++ String getFullName()
++ String toString()
++ String getRating()
++ void setRating(String)
+}
+abstract class org.example.OOP.BookCase.Parents.CommercialBook {
+- String bookCode
+- String title
+- Author author
+- Publisher publisher
+- double price
++ <<Create>> CommercialBook()
++ <<Create>> CommercialBook(String,String,Author,Publisher,double)
++ {abstract}void calculatePrice()
++ String toString()
++ String getFullName()
++ String getBookCode()
++ void setBookCode(String)
++ String getTitle()
++ void setTitle(String)
++ Author getAuthor()
++ void setAuthor(Author)
++ Publisher getPublisher()
++ void setPublisher(Publisher)
++ double getPrice()
++ void setPrice(double)
+}
+class org.example.OOP.BookCase.MainApp {
+- {static} RepositoryBook repoBook
+- {static} RepositoryPerson repoPerson
+- {static} RepositoryPublisher repoPublisher
+- {static} Scanner scanner
++ {static} void main(String[])
+- {static} void displayMainMenu()
+- {static} void bookMenu()
+- {static} void displayBookMenu()
+- {static} void authorMenu()
+- {static} void displayAuthorMenu()
+- {static} void publisherMenu()
+- {static} void displayPublisherMenu()
+- {static} void searchCheapestBook()
+- {static} void searchMostExpensiveBook()
+- {static} void searchBooksByPriceRange()
+- {static} void searchComicsByMangakaRating()
+- {static} void searchBooksByPublisherCountry()
+- {static} void searchBooksByAuthorCountry()
+- {static} void searchMostExpensiveComic()
+- {static} void searchAllMangaka()
+- {static} void searchAllAuthors()
+- {static} void searchAllNovelis()
+- {static} void searchAuthorsByAgeRange()
+- {static} void searchAuthorsByCountry()
+- {static} void searchPublisherWithHighestProductionCost()
+- {static} void searchPublisherWithLowestProductionCost()
+}
+class org.example.OOP.BookCase.Repositories.RepositoryBook {
+- List<CommercialBook> books
++ <<Create>> RepositoryBook()
++ void addBook(CommercialBook)
++ List<CommercialBook> getAllBooks()
+}
+class org.example.OOP.BookCase.Childs.Novel {
+- String genre
+- Novelis author
++ <<Create>> Novel()
++ <<Create>> Novel(String,String,Novelis,Publisher,double,String)
++ void calculatePrice()
++ String toString()
++ String getGenre()
++ void setGenre(String)
++ Author getAuthor()
++ void setAuthor(Novelis)
+}
+interface org.example.OOP.BookCase.Interfaces.Person {
+~ String getFullName()
+~ int getAge()
+~ String getCountry()
+}
+class org.example.OOP.BookCase.Parents.Author {
+- String firstName
+- String lastName
+- String country
+- int age
++ <<Create>> Author()
++ <<Create>> Author(String,String,String,int)
++ String getFullName()
++ String toString()
++ String getFirstName()
++ void setFirstName(String)
++ String getLastName()
++ void setLastName(String)
++ String getCountry()
++ void setCountry(String)
++ int getAge()
++ void setAge(int)
+}
+class org.example.OOP.BookCase.Repositories.RepositoryPerson {
+- List<Author> authors
+- List<Mangaka> mangakas
+- List<Novelis> novelists
++ <<Create>> RepositoryPerson()
++ void addAuthor(Author)
++ void addMangaka(Mangaka)
++ void addNovelist(Novelis)
++ List<Mangaka> getAllMangakas()
++ List<Author> getAllAuthors()
++ List<Novelis> getAllNovelists()
++ List<Person> getAllPersons()
++ List<Person> getPersonsByAgeRange(int,int)
++ List<Person> getPersonsByCountry(String)
+}
+
+
+org.example.OOP.BookCase.Parents.CommercialBook <|-- org.example.OOP.BookCase.Childs.Comic
+org.example.OOP.BookCase.Parents.Author <|-- org.example.OOP.BookCase.Childs.Novelis
+org.example.OOP.BookCase.Parents.CommercialBook <|-- org.example.OOP.BookCase.Childs.EBook
+org.example.OOP.BookCase.Parents.Author <|-- org.example.OOP.BookCase.Childs.Mangaka
+org.example.OOP.BookCase.Parents.CommercialBook <|-- org.example.OOP.BookCase.Childs.Novel
+org.example.OOP.BookCase.Interfaces.Person <|.. org.example.OOP.BookCase.Parents.Author
+@enduml
